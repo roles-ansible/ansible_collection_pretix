@@ -1,0 +1,16 @@
+---
+- name: Create group for pretix
+  become: true
+  ansible.builtin.group:
+    name: "{{ pretix__group }}"
+    state: present
+
+- name: Add user for pretix with disabled password
+  become: true
+  ansible.builtin.user:
+    name: "{{ pretix__user }}"
+    home: "{{ pretix__home }}"
+    group: "{{ pretix__group }}"
+    password: '!'
+    create_home: true
+    system: true

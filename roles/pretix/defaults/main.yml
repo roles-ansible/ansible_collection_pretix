@@ -1,3 +1,6 @@
 ---
+pretix__user: 'pretix'
+pretix__group: "{{ pretix__user }}"
+
 # Optional perform simple Versionscheck
 packages__submodules_versioncheck: false
