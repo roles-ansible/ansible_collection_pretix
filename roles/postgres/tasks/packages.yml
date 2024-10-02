@@ -1,0 +1,43 @@
+---
+- name: Update apt repo-cache on debian/ubuntu hosts
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install Required packages
+  become: true
+  ansible.builtin.package:
+    name: 'apt-tansport-https'
+    state: 'present'
+
+- name: Create directory for PostgreSQL repository key
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: 'directory'
+    mode: '0755'
+    owner: 'root'
+    group: 'root'
+  with_items:
+    - '/usr/share/postgresql-common'
+    - '/usr/share/postgresql-common/pgdg'
+
+- name: Download the PostgreSQL signing key
+  get_url:
+    url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
+    dest: '/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc'
+
+#- name: Create the PostgreSQL repository configuration
+#  shell: echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+#
+#- name: Update apt cache
+#  apt:
+#    update_cache: yes
+#
+#- name: Install PostgreSQL
+#  apt:
+#    name: postgresql
+#    state: present
+#    update_cache: yes
+#    install_recommends: yes

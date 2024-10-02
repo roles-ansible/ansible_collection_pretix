@@ -4,14 +4,18 @@
     file: 'versioncheck.yml'
   when: packages__submodules_versioncheck | bool
 
-- name: Create user for pretix
-  ansible.builtin.include_tasks:
-    file: 'user.yml'
-
-- name: Install required packages
+- name: Make sure postgres is installed
   ansible.builtin.include_tasks:
     file: 'packages.yml'
+  when:
+    - ansible_pkg_mgr == "apt"
+
+- name: Only apt is supported
+  ansible.builtin.fail:
+    msg: "Only debian based systems using apt are supported"
+  when:
+    - not ansible_pkg_mgr == "apt"
 
 - name: Create pretix Configuration
   ansible.builtin.include_tasks:
-    file: 'configure.yml'
+    file: 'create_database.yml'
