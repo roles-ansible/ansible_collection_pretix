@@ -1,0 +1,5 @@
+---
+- name: Run simple versionscheck (optional)
+  ansible.builtin.include_tasks:
+    file: 'versioncheck.yml'
+  when: submodules_versioncheck | bool

@@ -2,7 +2,7 @@
 - name: Run simple versionscheck (optional)
   ansible.builtin.include_tasks:
     file: 'versioncheck.yml'
-  when: packages__submodules_versioncheck | bool
+  when: submodules_versioncheck | bool
 
 - name: Create user for pretix
   ansible.builtin.include_tasks:

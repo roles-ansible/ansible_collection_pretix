@@ -4,4 +4,4 @@ postgres__database: 'pretix'
 postgres__password: ''
 
 # Optional perform simple Versionscheck
-packages__submodules_versioncheck: false
+submodules_versioncheck: false
