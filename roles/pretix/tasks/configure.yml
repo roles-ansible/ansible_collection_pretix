@@ -1,3 +1,23 @@
 ---
-- name: Create directory for pretiy config
+- name: Create directory for pretix data
   become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: 'directory'
+    mode: '0751'
+    owner: "{{ pretix__user }}"
+    group: "{{ pretix__group }}"
+  with_items:
+    - '/etc/pretix'
+    - "{{ pretix__data }}"
+    - "{{ pretix__data }}/data"
+    - "{{ pretix__data }}/data/media"
+
+- name: Create pretix config
+  become: true
+  ansible.builtin.template:
+    src: 'templates/pretix.cfg.j2'
+    dest: '/etc/pretix/pretix.cfg'
+    mode: '0600'
+    owner: "{{ pretix__user }}"
+    group: "{{ pretix__group }}"

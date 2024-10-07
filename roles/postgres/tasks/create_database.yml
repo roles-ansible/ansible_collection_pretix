@@ -5,6 +5,8 @@
   become_method: community.general.sudosu
   community.postgresql.postgresql_user:
     name: "{{ postgres__user }}"
+    password: "{{ postgres__password }}"
+    encrypted: true
 
 - name: Create pretix database
   become: true
@@ -26,3 +28,5 @@
   community.postgresql.postgresql_user:
     name: "{{ postgres__user }}"
     db: "{{ postgres__database }}"
+    password: "{{ postgres__password }}"
+    encrypted: true

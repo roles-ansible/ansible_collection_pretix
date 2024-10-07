@@ -14,3 +14,4 @@
     password: '!'
     create_home: true
     system: true
+    shell: '/bin/bash'

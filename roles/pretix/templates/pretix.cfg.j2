@@ -1,26 +1,26 @@
 {{ ansible_managed | ansible.builtin.comment(decoration=';') }}
 
 [pretix]
-instance_name=My pretix installation
-url=https://pretix.mydomain.com
-currency=EUR
-datadir=/var/pretix/data
+instance_name={{ pretix__name }}
+url={{ pretix__address }}
+currency={{ pretix__currency }}
+datadir={{ pretix__datadir }}
 trust_x_forwarded_for=on
 trust_x_forwarded_proto=on
 
 [database]
-backend=postgresql
-name=pretix
-user=pretix
+backend={{ pretix__db_backend }}
+name={{ pretix__db_name }}
+user={{ pretix__db_user }}
 ; For PostgreSQL on the same host, we don't need a password because we can use
 ; peer authentication if our PostgreSQL user matches our unix user.
-password=
+password={{ pretix__db_password }}
 ; For local postgres authentication, you can leave it empty
-host=
+host={{ pretix__db_host }}
 
 [mail]
 ; See config file documentation for more options
-from=tickets@yourdomain.com
+from=tickets@example.org
 host=127.0.0.1
 
 [redis]

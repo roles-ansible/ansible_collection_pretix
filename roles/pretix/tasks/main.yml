@@ -15,3 +15,7 @@
 - name: Create pretix Configuration
   ansible.builtin.include_tasks:
     file: 'configure.yml'
+
+- name: Install pretix
+  ansible.builtin.include_tasks:
+    file: 'install.yml'

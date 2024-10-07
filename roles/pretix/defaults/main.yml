@@ -2,6 +2,19 @@
 pretix__user: 'pretix'
 pretix__group: "{{ pretix__user }}"
 pretix__home: '/var/lib/pretix'
+pretix__data: '/var/pretix'
+
+# pretix condifuration
+pretix__name: 'My Pretix'
+pretix__address: "https://{{ inventory_hostname }}"
+pretix__currency: 'EUR'
+pretix__datadir: "{{ pretix__data }}/data"
+pretix__db_backend: 'postgresql'
+pretix__db_name: 'pretix'
+pretix__db_user: 'pretix'
+pretix__db_password: ''
+pretix__db_host: 'localhost'
+
 
 # Optional perform simple Versionscheck
 packages__submodules_versioncheck: false

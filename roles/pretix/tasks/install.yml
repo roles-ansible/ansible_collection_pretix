@@ -1,0 +1,26 @@
+---
+- name: Prepare Python3 venv
+  become: true
+  become_user: "{{ pretix__user }}"
+  become_method: community.general.sudosu
+  ansible.builtin.pip:
+    name: "{{ item }}"
+    virtualenv: "{{ pretix__data }}/venv"
+  with_items: "{{ pretix__pip_packages }}"
+
+- name: Migrate pretix
+  become: true
+  become_user: "{{ pretix__user }}"
+  become_method: community.general.sudosu
+  ansible.builtin.command:
+    cmd: "{{ pretix__data }}/venv/bin/python3 -m pretix migrate"
+    chdir: "{{ pretix__data }}"
+
+- name: Rebuild pretix
+  become: true
+  become_user: "{{ pretix__user }}"
+  become_method: community.general.sudosu
+  ansible.builtin.command:
+    cmd: "{{ pretix__data }}/venv/bin/python3 -m pretix rebuild"
+    chdir: "{{ pretix__data }}"
+

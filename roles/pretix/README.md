@@ -5,6 +5,11 @@ Ansible role ``l3d.pretix.pretix`` to install and configure [pretix](https://git
 
 This role is part of the l3d.pretix Collection and work in progress!
 
+ Requirements
+--------------
++ postgres server with user and database
++ redis server
+
  License
 ---------
 [MIT Licence](../../LICENSE)
