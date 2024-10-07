@@ -1,1 +1,28 @@
 ---
+- name: Create pretix postges user
+  become: true
+  become_user: postgres
+  become_method: community.general.sudosu
+  community.postgresql.postgresql_user:
+    name: "{{ postgres__user }}"
+
+- name: Create pretix database
+  become: true
+  become_user: postgres
+  become_method: community.general.sudosu
+  community.postgresql.postgresql_db:
+    name: "{{ postgres__database }}"
+    encoding: 'UTF-8'
+    lc_collate: 'de_DE.UTF-8'
+    lc_ctype: 'de_DE.UTF-8'
+    locale_provider: 'icu'
+    icu_locale: 'de-DE-x-icu'
+    template: 'template0'
+
+- name: Make sure pretix database is owned by right user
+  become: true
+  become_user: postgres
+  become_method: community.general.sudosu
+  community.postgresql.postgresql_user:
+    name: "{{ postgres__user }}"
+    db: "{{ postgres__database }}"

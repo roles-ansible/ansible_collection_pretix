@@ -8,8 +8,11 @@
 - name: Install Required packages
   become: true
   ansible.builtin.package:
-    name: 'apt-tansport-https'
+    name: "{{ item }}"
     state: 'present'
+  with_items:
+    - 'apt-transport-https'
+    - 'python3-psycopg2'
 
 - name: Create directory for PostgreSQL repository key
   become: true
@@ -24,20 +27,29 @@
     - '/usr/share/postgresql-common/pgdg'
 
 - name: Download the PostgreSQL signing key
-  get_url:
+  become: true
+  ansible.builtin.get_url:
     url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
     dest: '/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc'
+    checksum: 'sha256:0144068502a1eddd2a0280ede10ef607d1ec592ce819940991203941564e8e76'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
 
-#- name: Create the PostgreSQL repository configuration
-#  shell: echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-#
-#- name: Update apt cache
-#  apt:
-#    update_cache: yes
-#
-#- name: Install PostgreSQL
-#  apt:
-#    name: postgresql
-#    state: present
-#    update_cache: yes
-#    install_recommends: yes
+- name: Create Apt Repository
+  become: true
+  ansible.builtin.template:
+    src: 'templates/pgdg.list.j2'
+    dest: '/etc/apt/sources.list.d/pgdg.list'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+
+- name: Install PostgreSQL
+  become: true
+  ansible.builtin.apt:
+    name: 'postgresql'
+    state: 'present'
+    update_cache: true
+    cache_valid_time: 0
+    install_recommends: true

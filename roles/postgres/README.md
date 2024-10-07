@@ -5,4 +5,6 @@ Ansible role to install postgresql for the pretix installation of this collectio
 
 This role is work in progress.
 
+Variables
+postgres__user
 

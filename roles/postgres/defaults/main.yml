@@ -1,3 +1,6 @@
 ---
+postgres__user: 'pretix'
+postgres__database: 'pretix'
+
 # Optional perform simple Versionscheck
 packages__submodules_versioncheck: false
