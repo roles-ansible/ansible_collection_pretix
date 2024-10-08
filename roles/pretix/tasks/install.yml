@@ -15,6 +15,7 @@
   ansible.builtin.command:
     cmd: "{{ pretix__data }}/venv/bin/python3 -m pretix migrate"
     chdir: "{{ pretix__data }}"
+  changed_when: false
 
 - name: Rebuild pretix
   become: true
@@ -23,4 +24,4 @@
   ansible.builtin.command:
     cmd: "{{ pretix__data }}/venv/bin/python3 -m pretix rebuild"
     chdir: "{{ pretix__data }}"
-
+  changed_when: false
