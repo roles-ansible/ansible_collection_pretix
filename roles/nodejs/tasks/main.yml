@@ -15,5 +15,5 @@
 - name: Install redis-server
   become: true
   ansible.builtin.package:
-    name: 'redis-server'
+    name: 'nodejs'
     state: 'present'

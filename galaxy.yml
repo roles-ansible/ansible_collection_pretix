@@ -42,8 +42,8 @@ tags:
 # L(specifiers,https://python-semanticversion.readthedocs.io/en/latest/#requirement-specification). Multiple version
 # range specifiers can be set and are separated by ','
 dependencies:
-  "community.general": ">=9.4.0"
-  "community.postgresql": ">=3.5.0"
+  "community.general": ">=9.4.0,<11.0.0"
+  "community.postgresql": ">=3.6.1,<4.0.0"
 
 # The URL of the originating SCM repository
 repository: https://github.com/roles-ansible/ansible_collection_pretix.git

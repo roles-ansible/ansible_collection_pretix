@@ -48,8 +48,9 @@
 - name: Install PostgreSQL
   become: true
   ansible.builtin.apt:
-    name: 'postgresql'
+    name: "{{ item }}"
     state: 'present'
     update_cache: true
     cache_valid_time: 0
     install_recommends: true
+  with_items: "{{ postgres__packages }}"

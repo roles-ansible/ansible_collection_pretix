@@ -30,3 +30,38 @@
     db: "{{ postgres__database }}"
     password: "{{ postgres__password }}"
     encrypted: true
+
+- name: Grant ALL privileges on public schema to pretix database user
+  become: true
+  become_user: postgres
+  become_method: community.general.sudosu
+  community.postgresql.postgresql_privs:
+    database: "{{ postgres__database }}"
+    roles: "{{ postgres__user }}"
+    privs: 'ALL'
+    type: 'schema'
+    objs: 'public'
+    state: 'present'
+
+- name: Ensure the user can create tables and objects in the public schema
+  become: true
+  become_user: postgres
+  become_method: community.general.sudosu
+  community.postgresql.postgresql_privs:
+    database: "{{ postgres__database }}"
+    roles: "{{ postgres__user }}"
+    privs: "CREATE,USAGE"
+    type: 'schema'
+    objs: 'public'
+    state: 'present'
+
+- name: Grant create privileges on the database for pretix user
+  become: true
+  become_user: postgres
+  become_method: community.general.sudosu
+  community.postgresql.postgresql_privs:
+    database: "{{ postgres__database }}"
+    roles: "{{ postgres__user }}"
+    privs: "CREATE"
+    type: 'database'
+    state: 'present'
