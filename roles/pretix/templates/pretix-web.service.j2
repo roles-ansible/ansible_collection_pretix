@@ -1,0 +1,20 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=pretix web service
+After=network.target
+
+[Service]
+User={{ pretix__user }}
+Group={{ pretix__group }}
+Environment="VIRTUAL_ENV={{ pretix__data }}/venv"
+Environment="PATH={{ pretix__data }}/venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart={{ pretix__data }}/venv/bin/gunicorn pretix.wsgi \
+          --name pretix --workers {{ pretix__web_workers }} \
+          --max-requests 1200  --max-requests-jitter 50 \
+          --log-level={{ pretix__web_loglevel }} --bind={{ pretix__web_bind }}
+WorkingDirectory={{ pretix__data }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

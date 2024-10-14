@@ -1,0 +1,16 @@
+---
+- name: Restart pretix worker
+  listen: 'systemctl restart pretix-web.service'
+  become: true
+  ansible.builtin.systemd_service:
+    name: 'pretix-web'
+    state: 'restarted'
+    enabled: true
+
+- name: Restart pretix worker
+  listen: 'systemctl restart pretix-worker.service'
+  become: true
+  ansible.builtin.systemd_service:
+    name: 'pretix-worker'
+    state: 'restarted'
+    enabled: true
