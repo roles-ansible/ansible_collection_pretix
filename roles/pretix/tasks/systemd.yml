@@ -22,12 +22,22 @@
 - name: Create pretix-cron service unit
   become: true
   ansible.builtin.template:
-    src: 'templates/pretix-cron.timer.j2'
+    src: 'templates/pretix-cron.service.j2'
     dest: '/etc/systemd/system/pretix-cron.service'
     owner: 'root'
     group: 'root'
     mode: '0644'
   notify: 'systemctl restart pretix-cron.service'
+
+- name: Create pretix-cron service timer
+  become: true
+  ansible.builtin.template:
+    src: 'templates/pretix-cron.timer.j2'
+    dest: '/etc/systemd/system/pretix-cron.timer'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: 'systemctl start pretix-cron.timer'
 
 - name: Make sure services are started
   become: true

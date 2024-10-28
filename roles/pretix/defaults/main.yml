@@ -18,7 +18,7 @@ pretix__db_host: 'localhost'
 pretix__web_workers: 5
 pretix__web_loglevel: 'info'
 pretix__web_bind: '127.0.0.1:8345'
-pretix__web_oncalendar: '*-*-* */6:00:00'
+pretix__web_oncalendar: '*-*-* *:00:00'
 pretix__web_timer_delay: '1800'
 
 # Optional perform simple Versionscheck

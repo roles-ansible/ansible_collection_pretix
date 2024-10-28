@@ -70,3 +70,7 @@ Example Playbook to install Pretix:
 
 ## Requirements
 The roles in this collection using the ``community.general`` and ``community.postgresql`` ansible Collections.
+
+ Author
+--------
+L3D <l3d@c3woc.de> and Contibutors
