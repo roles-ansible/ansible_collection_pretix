@@ -6,6 +6,7 @@
     name: 'pretix-web'
     state: 'restarted'
     enabled: true
+    daemon_reload: true
 
 - name: Restart pretix worker
   listen: 'systemctl restart pretix-worker.service'
@@ -14,3 +15,22 @@
     name: 'pretix-worker'
     state: 'restarted'
     enabled: true
+    daemon_reload: true
+
+- name: Restart pretix cron
+  listen: 'systemctl restart pretix-cron.service'
+  become: true
+  ansible.builtin.systemd_service:
+    name: 'pretix-cron'
+    state: 'restarted'
+    enabled: true
+    daemon_reload: true
+
+- name: Start pretix cron
+  listen: 'systemctl start pretix-cron.timer'
+  become: true
+  ansible.builtin.systemd_service:
+    name: 'pretix-cron.timer'
+    state: 'restarted'
+    enabled: true
+    daemon_reload: true

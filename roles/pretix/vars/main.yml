@@ -21,5 +21,5 @@ pretix__pip_packages:
   - 'pretix'
   - 'gunicorn'
 
-packages__playbook_version_number: 5
+packages__playbook_version_number: 6
 packages__playbook_version_path: 'l3d.pretix.pretix.version'
