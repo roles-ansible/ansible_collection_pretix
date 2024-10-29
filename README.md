@@ -12,7 +12,7 @@ It is inspired by [this install guide](https://docs.pretix.eu/en/latest/admin/in
 - [![l3d.pretix.pretix](https://ansible.l3d.space/svg/l3d.pretix.pretix_ansible-role.svg)](https://galaxy.ansible.com/ui/repo/published/l3d/pretix/content/role/pretix/) - Ansible role to install pretix
 - [![l3d.pretix.postgres](https://ansible.l3d.space/svg/l3d.pretix.postgres_ansible-role.svg)](https://galaxy.ansible.com/ui/repo/published/l3d/pretix/content/role/postgres/) - Ansible role to install postgres - optimized for pretix
 - [![l3d.pretix.nodejs](https://ansible.l3d.space/svg/l3d.pretix.nodejs_ansible-role.svg)](https://galaxy.ansible.com/ui/repo/published/l3d/pretix/content/role/nodejs/) - Ansible role to install nodejs - optimized for pretix
-- [![l3d.pretix.redis](https://ansible.l3d.space/svg/l3d.pretix.redis_ansible-role.svg)](https://galaxy.ansible.com/ui/repo/published/l3d/pretix/content/role/redis/) - Ansible role to install redis - optimized for redis
+- [![l3d.pretix.redis](https://ansible.l3d.space/svg/l3d.pretix.redis_ansible-role.svg)](https://galaxy.ansible.com/ui/repo/published/l3d/pretix/content/role/redis/) - Ansible role to install redis - optimized for pretix
 
 ## Hint
 The roles ``l3d.pretix.nodejs``, ``l3d.pretix.postgres`` and ``l3d.pretix.redis`` are needed to install all requirements for Pretix. The You can install pretix using ``l3d.pretix.pretix``.
