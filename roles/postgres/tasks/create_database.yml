@@ -2,7 +2,6 @@
 - name: Create pretix postges user
   become: true
   become_user: postgres
-  become_method: community.general.sudosu
   community.postgresql.postgresql_user:
     name: "{{ postgres__user }}"
     password: "{{ postgres__password }}"
@@ -11,7 +10,6 @@
 - name: Create pretix database
   become: true
   become_user: postgres
-  become_method: community.general.sudosu
   community.postgresql.postgresql_db:
     name: "{{ postgres__database }}"
     encoding: 'UTF-8'
@@ -24,7 +22,6 @@
 - name: Make sure pretix database is owned by right user
   become: true
   become_user: postgres
-  become_method: community.general.sudosu
   community.postgresql.postgresql_user:
     name: "{{ postgres__user }}"
     db: "{{ postgres__database }}"
@@ -34,7 +31,6 @@
 - name: Grant ALL privileges on public schema to pretix database user
   become: true
   become_user: postgres
-  become_method: community.general.sudosu
   community.postgresql.postgresql_privs:
     database: "{{ postgres__database }}"
     roles: "{{ postgres__user }}"
@@ -46,7 +42,6 @@
 - name: Ensure the user can create tables and objects in the public schema
   become: true
   become_user: postgres
-  become_method: community.general.sudosu
   community.postgresql.postgresql_privs:
     database: "{{ postgres__database }}"
     roles: "{{ postgres__user }}"
@@ -58,7 +53,6 @@
 - name: Grant create privileges on the database for pretix user
   become: true
   become_user: postgres
-  become_method: community.general.sudosu
   community.postgresql.postgresql_privs:
     database: "{{ postgres__database }}"
     roles: "{{ postgres__user }}"
