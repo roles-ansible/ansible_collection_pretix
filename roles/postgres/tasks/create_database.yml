@@ -24,7 +24,7 @@
   become_user: postgres
   community.postgresql.postgresql_user:
     name: "{{ postgres__user }}"
-    db: "{{ postgres__database }}"
+    login_db: "{{ postgres__database }}"
     password: "{{ postgres__password }}"
     encrypted: true
 
