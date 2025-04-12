@@ -20,7 +20,7 @@ The roles ``l3d.pretix.nodejs``, ``l3d.pretix.postgres`` and ``l3d.pretix.redis`
 ## Using this Collection
 You can install the collection using ansible-galaxy by running:
 ```bash
-ansible-galaxy collection install l3d.pretix:1.0.0
+ansible-galaxy collection install l3d.pretix:1.0.1
 ```
 
 Remember you can to Upgrade to the latest version of the l3d.pretix collection using the ``--upgrade`` parameter:
@@ -48,7 +48,7 @@ You can also list a collection in ``requirements.yml``:
 ---
 collections:
   - name: l3d.pretix
-    version: ">=1.0.0"
+    version: ">=1.0.1"
 ```
 
 ## Example Playbook
